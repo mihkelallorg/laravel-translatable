@@ -17,10 +17,10 @@ has a lot more history and community behind it is way way larger.
 
 ### Index
 
-- Info
-- Quick start
-- FAQ
-- Contribution
+- [Info](#info)
+- [Quick start](#quick-start)
+- [FAQ](#faq)
+- [Contribution](#contribution)
 
 ## Info
 
