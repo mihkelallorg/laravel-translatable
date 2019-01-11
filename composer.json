@@ -1,9 +1,11 @@
 {
-    "name": "matthewbdaly/laravel-package-boilerplate",
-    "description": "Starting boilerplate for Laravel packages. Override the content in here when creating your own package",
+    "name": "mihkullorg/laravel-translatable",
+    "description": "",
     "type": "library",
     "keywords": ["laravel","lumen"],
-    "require": {},
+    "require": {
+        "google/cloud-translate": "^1.2"
+    },
     "require-dev": {
         "matthewbdaly/artisan-standalone": "0.0.*",
         "mockery/mockery": "~1.0",
@@ -19,19 +21,19 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Matthew Daly",
-            "email": "matthewbdaly@gmail.com"
+            "name": "Mihkel Allorg",
+            "email": "mihkel@lightweber.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Package\\": "src/"
+            "Mihkullorg\\Translatable\\": "src/"
         }
     },
     "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
+        "classmap": [
+            "tests"
+        ]
     },
     "scripts": {
         "post-create-project-cmd": [
@@ -51,7 +53,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Package\\Providers\\ServiceProvider"
+                "Mihkullorg\\Translatable\\Providers\\ServiceProvider"
             ]
         }
     }

@@ -3,27 +3,35 @@
 namespace Tests;
 
 use Hash;
+use Mihkullorg\Translatable\TranslatableServiceProvider;
 
 trait CreatesApplication
 {
     protected function getPackageProviders($app)
     {
-        return ['Package\ServiceProvider'];
+        return ['Mihkullorg\Translatable\TranslatableServiceProvider'];
     }
 
     protected function getPackageAliases($app)
     {
-        return [
-            'Facade' => 'Package\Facade'
-        ];
+        return [];
+    }
+
+    protected function getEnvironmentSetup($app)
+    {
+
     }
 
     public function setUp()
     {
         parent::setUp();
+
         $this->artisan('migrate', ['--database' => 'sqlite']);
+        $this->artisan('migrate', ['--database' => 'sqlite', '--path' => '../../../../tests/migrations']);
+
         $this->loadLaravelMigrations(['--database' => 'sqlite']);
         $this->withFactories(__DIR__.'/factories');
+
     }
 
     /**
