@@ -2,10 +2,9 @@
 
 namespace Mihkullorg\Translatable\Contracts;
 
-interface TranslatorInterface {
-
+interface TranslatorInterface
+{
     public function detectLanguage($text);
 
     public function translate($text, $language);
-
 }

@@ -5,8 +5,8 @@ use Mihkullorg\Translatable\Facades\Translator;
 use Mihkullorg\Translatable\Tests\Models\TestModel;
 use Tests\TestCase;
 
-class TranslatableTest extends TestCase {
-
+class TranslatableTest extends TestCase
+{
     public function test_translating_model_field_manually()
     {
         /** @var TestModel $model */
@@ -99,5 +99,4 @@ class TranslatableTest extends TestCase {
         $translation->save(['timestamps' => false]);
         return $translation;
     }
-
 }

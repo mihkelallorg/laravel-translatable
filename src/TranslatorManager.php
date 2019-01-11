@@ -6,7 +6,8 @@ use Illuminate\Support\Manager;
 use Mihkullorg\Translatable\Contracts\TranslatorInterface;
 use Mihkullorg\Translatable\Drivers\GoogleTranslator;
 
-class TranslatorManager extends Manager implements TranslatorInterface {
+class TranslatorManager extends Manager implements TranslatorInterface
+{
 
     /**
      * Get the default driver name.

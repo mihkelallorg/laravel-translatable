@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Mihkullorg\Translatable\Facades\Translator;
 use Mihkullorg\Translatable\Models\Translation;
 
-trait Translatable {
-
+trait Translatable
+{
     public function translate($field, $language, $translation = null)
     {
         if (!$translation) {
@@ -83,5 +83,4 @@ trait Translatable {
             'language' => $language,
         ]);
     }
-
 }
