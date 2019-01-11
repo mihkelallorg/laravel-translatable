@@ -19,7 +19,6 @@ trait CreatesApplication
 
     protected function getEnvironmentSetup($app)
     {
-
     }
 
     public function setUp()
@@ -31,7 +30,6 @@ trait CreatesApplication
 
         $this->loadLaravelMigrations(['--database' => 'sqlite']);
         $this->withFactories(__DIR__.'/factories');
-
     }
 
     /**

@@ -5,8 +5,8 @@ namespace Mihkullorg\Translatable\Drivers;
 use Google\Cloud\Translate\TranslateClient;
 use Mihkullorg\Translatable\Contracts\TranslatorInterface;
 
-class GoogleTranslator implements TranslatorInterface {
-
+class GoogleTranslator implements TranslatorInterface
+{
     private $client;
 
     public function __construct()

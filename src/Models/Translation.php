@@ -5,8 +5,8 @@ namespace Mihkullorg\Translatable\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class Translation extends Model {
-
+class Translation extends Model
+{
     protected $table = 'mt_translations';
 
     protected $fillable = [
@@ -39,5 +39,4 @@ class Translation extends Model {
     {
         return $this->morphTo();
     }
-
 }
