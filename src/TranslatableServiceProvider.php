@@ -33,11 +33,12 @@ class TranslatableServiceProvider extends BaseServiceProvider
     private function publishConfig()
     {
         $config = __DIR__ . '/../config/config.php';
-        $migration = __DIR__ . '/database/migrations/2019_01_10_000001_create_translatable_tables.php';
+        $migrationFileName = '2019_01_10_000001_create_translatable_tables.php';
+        $migration = __DIR__ . '/database/migrations/' . $migrationFileName;
 
         $this->publishes([
             $config => config_path('translatable.php'),
-            $migration => app_path('database/migrations/'),
+            $migration => app_path('database/migrations/' . $migrationFileName),
         ], 'translatable');
     }
 }
