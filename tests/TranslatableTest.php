@@ -29,7 +29,7 @@ class TranslatableTest extends TestCase
         $language = 'en';
         $translatedField = 'Translated body';
 
-        Translator::shouldReceive('translate')->with($model->body, ['target' => $language])->andReturn($translatedField);
+        Translator::shouldReceive('translate')->with($model->body, $language)->andReturn($translatedField);
         $model->translate($field, $language);
 
         $this->assertTranslationExists($model, $field, $language, $translatedField);
@@ -51,7 +51,7 @@ class TranslatableTest extends TestCase
 
         $this->createTranslationInThePast($model, $field, $language, $oldTranslatedFieldValue);
 
-        Translator::shouldReceive('translate')->with($model->body, ['target' => $language])->andReturn($translatedFieldValue);
+        Translator::shouldReceive('translate')->with($model->body, $language)->andReturn($translatedFieldValue);
 
         $model->translation($field, $language, true);
 

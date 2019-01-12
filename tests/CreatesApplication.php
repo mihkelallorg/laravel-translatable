@@ -3,7 +3,6 @@
 namespace Tests;
 
 use Hash;
-use Mihkullorg\Translatable\TranslatableServiceProvider;
 
 trait CreatesApplication
 {
