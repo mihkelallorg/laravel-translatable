@@ -5,7 +5,7 @@ namespace Mihkullorg\Translatable\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static string translate(string $field, array $options)
+ * @method static string translate(string $field, string $language)
  */
 class Translator extends Facade
 {

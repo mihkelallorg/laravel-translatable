@@ -11,7 +11,7 @@ trait Translatable
     public function translate($field, $language, $translation = null)
     {
         if (!$translation) {
-            $translation = Translator::translate($this->$field, ['target' => $language]);
+            $translation = Translator::translate($this->$field, $language);
         }
 
         return $this->createTranslation($field, $language, $translation);
