@@ -19,6 +19,13 @@ class Translation extends Model
 
     protected $dates = ['updated_at'];
 
+    public function isFresherThan($date)
+    {
+        $date = $date instanceof Carbon ? $date : Carbon::parse($date);
+
+        return $this->updated_at->greaterThanOrEqualTo($date);
+    }
+
     public function scopeField($query, $field)
     {
         return $query->where('field', '=', $field);

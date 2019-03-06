@@ -25,20 +25,13 @@ trait Translatable
      */
     public function translation($field, $language, $createIfNotFresh = false)
     {
-        $translation = $this->freshTranslation($field, $language);
+        $translation = $this->translations()->field($field)->language($language)->first();
 
-        if ($translation || ! $createIfNotFresh) {
+        if (! $createIfNotFresh || $translation->isFresherThan($this->created_at)) {
             return $translation;
         }
 
-        $this->deleteTranslation($field, $language);
-
         return $this->translate($field, $language);
-    }
-
-    public function freshTranslations()
-    {
-        return $this->translations()->fresherThan($this->updated_at);
     }
 
     /**
@@ -47,16 +40,6 @@ trait Translatable
     public function translations()
     {
         return $this->morphMany(Translation::class, 'translatable');
-    }
-
-    /**
-     * @param string $field Translatable field name
-     * @param string $language Language code
-     * @return Translation
-     */
-    public function freshTranslation($field, $language)
-    {
-        return $this->freshTranslations()->field($field)->language($language)->first();
     }
 
     /**
@@ -77,10 +60,33 @@ trait Translatable
      */
     public function createTranslation($field, $language, $translation)
     {
-        return $this->translations()->create([
+        return $this->translations()->updateOrCreate([
             'field' => $field,
-            'value' => $translation,
             'language' => $language,
+        ], [
+            'value' => $translation,
         ]);
+    }
+
+    /**
+     * [
+     *  [
+     *      'language' => 'en',
+     *      'body' => 'English body translations',
+     *      'title' => '...',
+     *  ],
+     *  [
+     *      'language' => 'ru',
+     *      'body' => 'Russian body translations',
+     *      'title' => '...',
+     * ]
+     *
+     * @return array[]
+     */
+    public function getTranslationsAsArray()
+    {
+        return $this->translations->groupBy('language')->map(function($language) {
+            return $language->groupBy('field')->map(function($field) { return $field->first()->value; });
+        })->each(function($values, $language) { $values->put('language', $language); })->values()->toArray();
     }
 }

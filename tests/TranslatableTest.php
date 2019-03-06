@@ -7,6 +7,11 @@ use Tests\TestCase;
 
 class TranslatableTest extends TestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+    }
+
     public function test_translating_model_field_manually()
     {
         /** @var TestModel $model */
@@ -57,6 +62,31 @@ class TranslatableTest extends TestCase
 
         $this->assertTranslationExists($model, $field, $language, $translatedFieldValue);
         $this->assertTranslationMissing($model, $field, $language, $oldTranslatedFieldValue);
+    }
+
+    public function test_retrieve_translations_as_array()
+    {
+        /** @var TestModel $model */
+        $model = factory(TestModel::class)->create();
+
+        $field = 'body';
+        $englishTranslation = 'English translation';
+        $russianTranslation = 'Russian translation';
+        $model->createTranslation($field, 'en', $englishTranslation);
+        $model->createTranslation($field, 'ru', $russianTranslation);
+
+        $translations = $model->getTranslationsAsArray();
+
+        $this->assertCount(2, $translations);
+        $this->assertTrue(in_array([
+            'language' => 'en',
+            'body' => $englishTranslation,
+        ], $translations));
+
+        $this->assertTrue(in_array([
+            'language' => 'ru',
+            'body' => $russianTranslation,
+        ], $translations));
     }
 
     /**
