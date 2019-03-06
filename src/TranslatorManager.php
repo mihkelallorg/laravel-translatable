@@ -3,12 +3,11 @@
 namespace Mihkullorg\Translatable;
 
 use Illuminate\Support\Manager;
-use Mihkullorg\Translatable\Contracts\TranslatorInterface;
 use Mihkullorg\Translatable\Drivers\GoogleTranslator;
+use Mihkullorg\Translatable\Contracts\TranslatorInterface;
 
 class TranslatorManager extends Manager implements TranslatorInterface
 {
-
     /**
      * Get the default driver name.
      *

@@ -1,16 +1,16 @@
 <?php
 
-namespace Mihkullorg\Translatable;
+namespace Mihkullorg\Translatable\Traits;
 
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Mihkullorg\Translatable\Facades\Translator;
 use Mihkullorg\Translatable\Models\Translation;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait Translatable
 {
     public function translate($field, $language, $translation = null)
     {
-        if (!$translation) {
+        if (! $translation) {
             $translation = Translator::translate($this->$field, $language);
         }
 
@@ -45,7 +45,7 @@ trait Translatable
     /**
      * @param string $field Translatable field name
      * @param string $language Language code
-     * @return integer
+     * @return int
      */
     public function deleteTranslation($field, $language)
     {
@@ -79,14 +79,18 @@ trait Translatable
      *      'language' => 'ru',
      *      'body' => 'Russian body translations',
      *      'title' => '...',
-     * ]
+     * ].
      *
      * @return array[]
      */
     public function getTranslationsAsArray()
     {
         return $this->translations->groupBy('language')->map(function($language) {
-            return $language->groupBy('field')->map(function($field) { return $field->first()->value; });
-        })->each(function($values, $language) { $values->put('language', $language); })->values()->toArray();
+            return $language->groupBy('field')->map(function($field) {
+                return $field->first()->value;
+            });
+        })->each(function($values, $language) {
+            $values->put('language', $language);
+        })->values()->toArray();
     }
 }

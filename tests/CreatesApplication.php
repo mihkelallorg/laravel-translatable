@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Mihkullorg\Tests\Translatable;
 
 use Hash;
 
@@ -20,7 +20,7 @@ trait CreatesApplication
     {
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

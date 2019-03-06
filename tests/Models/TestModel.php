@@ -1,9 +1,9 @@
 <?php
 
-namespace Mihkullorg\Translatable\Tests\Models;
+namespace Mihkullorg\Tests\Translatable\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Mihkullorg\Translatable\Translatable;
+use Mihkullorg\Translatable\Traits\Translatable;
 
 class TestModel extends Model
 {

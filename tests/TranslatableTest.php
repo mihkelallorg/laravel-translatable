@@ -1,17 +1,13 @@
 <?php
 
+namespace Mihkullorg\Tests\Translatable;
+
 use Carbon\Carbon;
+use Mihkullorg\Tests\Translatable\Models\TestModel;
 use Mihkullorg\Translatable\Facades\Translator;
-use Mihkullorg\Translatable\Tests\Models\TestModel;
-use Tests\TestCase;
 
 class TranslatableTest extends TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     public function test_translating_model_field_manually()
     {
         /** @var TestModel $model */
@@ -41,8 +37,8 @@ class TranslatableTest extends TestCase
     }
 
     /**
-     * Old translation should be deleted
-     * New translation should be created with Translator
+     * Old translation should be deleted.
+     * New translation should be created with Translator.
      */
     public function test_translating_an_updated_model()
     {
@@ -105,6 +101,7 @@ class TranslatableTest extends TestCase
             'value' => $value,
         ]);
     }
+
     /**
      * @param TestModel $model
      * @param $field
@@ -127,6 +124,7 @@ class TranslatableTest extends TestCase
         $translation = $model->translations()->make(compact('field', 'language', 'value'));
         $translation->updated_at = Carbon::now()->subDay();
         $translation->save(['timestamps' => false]);
+
         return $translation;
     }
 }

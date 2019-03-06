@@ -1,7 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
-use Mihkullorg\Translatable\Tests\Models\TestModel;
+use Mihkullorg\Tests\Translatable\Models\TestModel;
 
 /*
 |--------------------------------------------------------------------------

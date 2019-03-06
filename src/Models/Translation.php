@@ -39,6 +39,7 @@ class Translation extends Model
     public function scopeFresherThan($query, $date)
     {
         $date = $date instanceof Carbon ? $date->toDateTimeString() : $date;
+
         return $query->where('updated_at', '>=', $date);
     }
 
