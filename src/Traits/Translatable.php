@@ -85,11 +85,11 @@ trait Translatable
      */
     public function getTranslationsAsArray()
     {
-        return $this->translations->groupBy('language')->map(function($language) {
-            return $language->groupBy('field')->map(function($field) {
+        return $this->translations->groupBy('language')->map(function ($language) {
+            return $language->groupBy('field')->map(function ($field) {
                 return $field->first()->value;
             });
-        })->each(function($values, $language) {
+        })->each(function ($values, $language) {
             $values->put('language', $language);
         })->values()->toArray();
     }

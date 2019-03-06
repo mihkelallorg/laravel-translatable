@@ -3,8 +3,8 @@
 namespace Mihkullorg\Tests\Translatable;
 
 use Carbon\Carbon;
-use Mihkullorg\Tests\Translatable\Models\TestModel;
 use Mihkullorg\Translatable\Facades\Translator;
+use Mihkullorg\Tests\Translatable\Models\TestModel;
 
 class TranslatableTest extends TestCase
 {
