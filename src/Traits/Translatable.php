@@ -2,6 +2,7 @@
 
 namespace Mihkullorg\Translatable\Traits;
 
+use Illuminate\Support\Facades\App;
 use Mihkullorg\Translatable\Facades\Translator;
 use Mihkullorg\Translatable\Models\Translation;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -92,5 +93,20 @@ trait Translatable
         })->each(function ($values, $language) {
             $values->put('language', $language);
         })->values()->toArray();
+    }
+
+    /**
+     * Get the translated field value.
+     *
+     * @param $field
+     * @param null $language Defaults to the App locale
+     * @param null $default The return value if the translation does not exist
+     * @return string
+     */
+    public function getTranslated($field, $language = null, $default = null)
+    {
+        $language = $language ?: App::getLocale();
+
+        return object_get($this->translation($field, $language), 'value', $default);
     }
 }
