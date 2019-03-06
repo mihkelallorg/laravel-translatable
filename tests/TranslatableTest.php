@@ -3,6 +3,7 @@
 namespace Mihkullorg\Tests\Translatable;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 use Mihkullorg\Translatable\Facades\Translator;
 use Mihkullorg\Tests\Translatable\Models\TestModel;
 
@@ -83,6 +84,24 @@ class TranslatableTest extends TestCase
             'language' => 'ru',
             'body' => $russianTranslation,
         ], $translations));
+    }
+
+    public function test_get_translated_method()
+    {
+        /** @var TestModel $model */
+        $model = factory(TestModel::class)->create();
+
+        $field = 'body';
+        $englishTranslation = 'English translation';
+        $model->createTranslation($field, 'en', $englishTranslation);
+
+        $this->assertEquals($model->getTranslated('body', 'en'), $englishTranslation);
+
+        App::setLocale('ru');
+        $this->assertNull($model->getTranslated('body'));
+
+        App::setLocale('en');
+        $this->assertEquals($model->getTranslated('body'), $englishTranslation);
     }
 
     /**
