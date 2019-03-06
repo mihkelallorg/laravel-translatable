@@ -96,7 +96,7 @@ trait Translatable
     }
 
     /**
-     * Get the translated field value
+     * Get the translated field value.
      *
      * @param $field
      * @param null $language Defaults to the App locale
