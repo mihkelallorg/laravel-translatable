@@ -93,14 +93,17 @@ class TranslatableTest extends TestCase
 
         $field = 'body';
         $englishTranslation = 'English translation';
+        $russianTranslation = 'Russian translation';
         $model->createTranslation($field, 'en', $englishTranslation);
+        $model->createTranslation($field, 'ru', $russianTranslation);
 
         $this->assertEquals($model->getTranslated('body', 'en'), $englishTranslation);
 
         App::setLocale('ru');
-        $this->assertNull($model->getTranslated('body'));
+        $this->assertEquals($model->getTranslated('body'), $russianTranslation);
 
-        App::setLocale('en');
+        // Model getDefaultLanguage method returns 'en' and as there's no Estonian translation it should return English
+        App::setLocale('et');
         $this->assertEquals($model->getTranslated('body'), $englishTranslation);
     }
 

@@ -100,13 +100,24 @@ trait Translatable
      *
      * @param $field
      * @param null $language Defaults to the App locale
-     * @param null $default The return value if the translation does not exist
      * @return string
      */
-    public function getTranslated($field, $language = null, $default = null)
+    public function getTranslated($field, $language = null)
     {
         $language = $language ?: App::getLocale();
 
-        return object_get($this->translation($field, $language), 'value', $default);
+        $value = object_get($this->translation($field, $language), 'value');
+
+        if ($value)
+        {
+            return $value;
+        }
+
+        if (method_exists($this, 'getDefaultLanguage'))
+        {
+            return object_get($this->translation($field, $this->getDefaultLanguage()), 'value');
+        }
+
+        return null;
     }
 }
