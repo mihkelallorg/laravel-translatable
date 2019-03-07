@@ -108,16 +108,12 @@ trait Translatable
 
         $value = object_get($this->translation($field, $language), 'value');
 
-        if ($value)
-        {
+        if ($value) {
             return $value;
         }
 
-        if (method_exists($this, 'getDefaultLanguage'))
-        {
+        if (method_exists($this, 'getDefaultLanguage')) {
             return object_get($this->translation($field, $this->getDefaultLanguage()), 'value');
         }
-
-        return null;
     }
 }
