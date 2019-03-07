@@ -16,4 +16,9 @@ class TestModel extends Model
     protected $fillable = [
         'body',
     ];
+
+    protected function getDefaultLanguage()
+    {
+        return 'en';
+    }
 }
