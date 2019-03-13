@@ -28,11 +28,11 @@ trait Translatable
     {
         $translation = $this->translations()->field($field)->language($language)->first();
 
-        if (! $createIfNotFresh || $translation->isFresherThan($this->created_at)) {
-            return $translation;
+        if ($createIfNotFresh && (! $translation || ! $translation->isFresherThan($this->created_at))) {
+            return $this->translate($field, $language);
         }
 
-        return $this->translate($field, $language);
+        return $translation;
     }
 
     /**
