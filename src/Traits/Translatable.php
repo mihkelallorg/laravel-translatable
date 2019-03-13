@@ -28,7 +28,7 @@ trait Translatable
     {
         $translation = $this->translations()->field($field)->language($language)->first();
 
-        if (! $createIfNotFresh || $translation->isFresherThan($this->created_at)) {
+        if ($translation && (! $createIfNotFresh || $translation->isFresherThan($this->created_at))) {
             return $translation;
         }
 
