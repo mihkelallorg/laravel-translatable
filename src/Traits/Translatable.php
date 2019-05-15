@@ -11,7 +11,7 @@ trait Translatable
 {
     public function translate($field, $language, $translation = null)
     {
-        if (! $translation) {
+        if (is_null($translation)) {
             $translation = Translator::translate($this->$field, $language);
         }
 
