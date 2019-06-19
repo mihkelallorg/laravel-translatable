@@ -11,7 +11,11 @@ class GoogleTranslator implements TranslatorInterface
 
     public function __construct()
     {
-        $this->client = new TranslateClient();
+        $keyFilePath = config('translatable.keyFilePath');
+
+        $config = $keyFilePath ? compact('keyFilePath') : [];
+
+        $this->client = new TranslateClient($config);
     }
 
     public function detectLanguage($text)
